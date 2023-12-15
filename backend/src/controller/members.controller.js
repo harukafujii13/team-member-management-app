@@ -3,16 +3,12 @@ const Member = require("../model/member.model");
 exports.getAllMembers = (req, res) => {
   Member.find()
     .then(({ rows }) => {
-      res.render("members", { model: rows });
+      res.json(rows);
     })
     .catch((err) => {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({ error: "Server Error" });
     });
-};
-
-exports.getCreateMember = (req, res) => {
-  res.render("create", { model: {} });
 };
 
 exports.postCreateMember = (req, res) => {
@@ -21,10 +17,11 @@ exports.postCreateMember = (req, res) => {
 
   newMember
     .save()
-    .then(() => res.redirect("/members/all"))
+    .then(() => res.status(201).json({ message: "Member created" }))
     .catch((err) => {
-      console.error(err.message);
-      res.status(500).send("Error creating member");
+      console.error("Error creating member:", err);
+      // console.error(err.message);
+      res.status(500).json({ error: "Error creating member" });
     });
 };
 
@@ -33,14 +30,14 @@ exports.getEditMemberById = (req, res) => {
   Member.findById(id)
     .then(({ rows }) => {
       if (rows.length > 0) {
-        res.render("edit", { model: rows[0] });
+        res.json(rows[0]);
       } else {
-        res.status(404).send("Member not found");
+        res.status(404).json({ error: "Member not found" });
       }
     })
     .catch((err) => {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).json({ error: "Server Error" });
     });
 };
 
@@ -50,19 +47,19 @@ exports.postEditMemberById = (req, res) => {
   const dataToUpdate = { id, firstName, lastName, email, phoneNum, role };
 
   Member.updateOne(dataToUpdate)
-    .then(() => res.redirect("/members/all"))
+    .then(() => res.json({ message: "Member updated" }))
     .catch((err) => {
       console.error(err.message);
-      res.status(500).send("Error updating member");
+      res.status(500).json({ error: "Error updating member" });
     });
 };
 
 exports.deleteMember = (req, res) => {
   const id = req.params.id;
   Member.deleteOne(id)
-    .then(() => res.redirect("/members/all"))
+    .then(() => res.json({ message: "Member deleted" }))
     .catch((err) => {
       console.error(err.message);
-      res.status(500).send("Error deleting member");
+      res.status(500).json({ error: "Error deleting member" });
     });
 };
