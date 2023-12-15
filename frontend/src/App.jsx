@@ -17,7 +17,7 @@ function App() {
           element={<AddPage />}
         />
         <Route
-          path="/edit"
+          path="/edit/:id"
           element={<EditPage />}
         />
       </Routes>
