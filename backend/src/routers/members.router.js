@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 const {
   getAllMembers,
-  getCreateMember,
   postCreateMember,
   getEditMemberById,
   postEditMemberById,
@@ -10,8 +9,9 @@ const {
 } = require("../controller/members.controller");
 
 router.get("/all", getAllMembers);
-router.route("/create").get(getCreateMember).post(postCreateMember);
-router.route("/edit/:id").get(getEditMemberById).post(postEditMemberById);
+router.post("/create", postCreateMember);
+router.get("/edit/:id", getEditMemberById);
+router.post("/edit/:id", postEditMemberById);
 router.delete("/delete/:id", deleteMember);
 
 module.exports = router;
