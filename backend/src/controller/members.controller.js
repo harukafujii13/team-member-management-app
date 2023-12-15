@@ -12,8 +12,8 @@ exports.getAllMembers = (req, res) => {
 };
 
 exports.postCreateMember = (req, res) => {
-  const { firstName, lastName, email, phoneNum, role } = req.body;
-  const newMember = new Member(firstName, lastName, email, phoneNum, role);
+  const { first_name, last_name, email, phone_num, role } = req.body;
+  const newMember = new Member(first_name, last_name, email, phone_num, role);
 
   newMember
     .save()
@@ -26,6 +26,7 @@ exports.postCreateMember = (req, res) => {
 };
 
 exports.getEditMemberById = (req, res) => {
+  console.log("Received data for update:", req.body);
   const id = req.params.id;
   Member.findById(id)
     .then(({ rows }) => {
@@ -43,8 +44,8 @@ exports.getEditMemberById = (req, res) => {
 
 exports.postEditMemberById = (req, res) => {
   const id = req.params.id;
-  const { firstName, lastName, email, phoneNum, role } = req.body;
-  const dataToUpdate = { id, firstName, lastName, email, phoneNum, role };
+  const { first_name, last_name, email, phone_num, role } = req.body;
+  const dataToUpdate = { id, first_name, last_name, email, phone_num, role };
 
   Member.updateOne(dataToUpdate)
     .then(() => res.json({ message: "Member updated" }))
