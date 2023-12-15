@@ -37,14 +37,14 @@ const EditPage = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        name="firstName"
-        value={memberData.firstName || ""}
+        name="first_name"
+        value={memberData.first_name || ""}
         onChange={handleChange}
         placeholder="First Name"
       />
       <input
-        name="lastName"
-        value={memberData.lastName || ""}
+        name="last_name"
+        value={memberData.last_name || ""}
         onChange={handleChange}
         placeholder="Last Name"
       />
@@ -55,8 +55,8 @@ const EditPage = () => {
         placeholder="Email"
       />
       <input
-        name="phoneNum"
-        value={memberData.phoneNum || ""}
+        name="phone_num"
+        value={memberData.phone_num || ""}
         onChange={handleChange}
         placeholder="Phone Number"
       />
