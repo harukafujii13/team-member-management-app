@@ -1,7 +1,8 @@
+// src/routes/ListPage.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAllMembers } from "../api/service/memberService";
-import { FaUser } from "react-icons/fa";
+import MemberList from "../components/MemberList";
 import { FiPlus } from "react-icons/fi";
 
 const ListPage = () => {
@@ -14,6 +15,10 @@ const ListPage = () => {
       .catch((error) => console.error("Error fetching members:", error));
   }, []);
 
+  const handleEdit = (memberId) => {
+    navigate(`/edit/${memberId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="container mx-auto px-4">
@@ -25,31 +30,13 @@ const ListPage = () => {
             <FiPlus className="h-6 w-6" />
           </Link>
         </div>
-        <p className="text-gray-500 mb-4">
+        <p className="text-gray-600 mb-4">
           You have {members.length} team members.
         </p>
-        <div className="space-y-4">
-          {members.map((member) => (
-            <div
-              key={member.member_id}
-              className="flex items-center p-4 bg-white shadow rounded-lg cursor-pointer hover:bg-gray-50"
-              onClick={() => navigate(`/edit/${member.member_id}`)}>
-              <div className="flex-shrink-0">
-                <FaUser className="h-12 w-12 text-gray-300" />
-              </div>
-              <div className="ml-4">
-                <div className="text-sm font-medium">
-                  {member.first_name} {member.last_name}
-                  {member.role === "Admin" && (
-                    <span className="text-xs font-semibold">(admin)</span>
-                  )}
-                </div>
-                <div className="text-sm text-gray-500">{member.phone_num}</div>
-                <div className="text-sm text-gray-500">{member.email}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <MemberList
+          members={members}
+          onEdit={handleEdit}
+        />
       </div>
     </div>
   );
