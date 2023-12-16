@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchAllMembers } from "../api/service/memberService"; // Adjust the path as necessary
+import { Link, useNavigate } from "react-router-dom";
+import { fetchAllMembers } from "../api/service/memberService";
+import { FaUser } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
 
 const ListPage = () => {
   const [members, setMembers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAllMembers()
@@ -12,41 +15,44 @@ const ListPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold">Team Members</h1>
-      <p>Number of members: {members.length}</p>
-      <ul>
-        {Array.isArray(members) &&
-          members.map((member) => (
-            <li key={member.member_id}>
-              {member.first_name} {member.last_name}
-              {member.role === "Admin" && " (Admin)"}
-              <Link to={`/edit/${member.member_id}`}>Edit</Link>
-            </li>
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-semibold">Team Members</h1>
+          <Link
+            to="/add"
+            className="text-blue-500 p-2 rounded-full bg-blue-100 hover:bg-blue-200">
+            <FiPlus className="h-6 w-6" />
+          </Link>
+        </div>
+        <p className="text-gray-500 mb-4">
+          You have {members.length} team members.
+        </p>
+        <div className="space-y-4">
+          {members.map((member) => (
+            <div
+              key={member.member_id}
+              className="flex items-center p-4 bg-white shadow rounded-lg cursor-pointer hover:bg-gray-50"
+              onClick={() => navigate(`/edit/${member.member_id}`)}>
+              <div className="flex-shrink-0">
+                <FaUser className="h-12 w-12 text-gray-300" />
+              </div>
+              <div className="ml-4">
+                <div className="text-sm font-medium">
+                  {member.first_name} {member.last_name}
+                  {member.role === "Admin" && (
+                    <span className="text-xs font-semibold">(admin)</span>
+                  )}
+                </div>
+                <div className="text-sm text-gray-500">{member.phone_num}</div>
+                <div className="text-sm text-gray-500">{member.email}</div>
+              </div>
+            </div>
           ))}
-      </ul>
-      <Link to="/add">+</Link>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default ListPage;
-
-// import React from "react";
-// import { FaPlus } from "react-icons/fa";
-
-// const ListPage = () => {
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-200">
-//       <div className="p-2 bg-white shadow-lg w-96 md:w-2/3 lg:w-1/4">
-//         <div className="text-xl text-blue-500 flex justify-end">
-//           <FaPlus />
-//         </div>
-//         <div className="text-xl">Team members</div>
-//         <span className="text-sm text-gray-400">You have 3 team members</span>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ListPage;
