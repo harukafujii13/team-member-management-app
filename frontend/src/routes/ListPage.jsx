@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { fetchAllMembers } from "../api/service/memberService"; // Adjust the path as necessary
 
 const ListPage = () => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/members/all")
-      .then((response) => {
-        console.log(response.data); // Add this line to inspect the data
-        setMembers(response.data);
-      })
+    fetchAllMembers()
+      .then((response) => setMembers(response.data))
       .catch((error) => console.error("Error fetching members:", error));
-    // axios
-    //   .get("/api/members/all")
-    //   .then((response) => setMembers(response.data))
-    //   .catch((error) => console.error("Error fetching members:", error));
   }, []);
 
   return (

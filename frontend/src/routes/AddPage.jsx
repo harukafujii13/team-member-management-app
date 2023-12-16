@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { createMember } from "../api/service/memberService"; // Adjust the path as necessary
 
 const AddPage = () => {
   const [memberData, setMemberData] = useState({ role: "Regular" });
@@ -8,8 +8,7 @@ const AddPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:8000/api/members/create", memberData)
+    createMember(memberData)
       .then(() => navigate("/"))
       .catch((error) => console.error("Error adding member:", error));
   };

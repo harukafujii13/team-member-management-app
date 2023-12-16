@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  fetchMemberById,
+  updateMember,
+  deleteMember,
+} from "../api/service/memberService"; // Adjust the path as necessary
 
 const EditPage = () => {
   const [memberData, setMemberData] = useState({});
@@ -8,17 +12,14 @@ const EditPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/members/edit/${id}`)
+    fetchMemberById(id)
       .then((response) => setMemberData(response.data))
       .catch((error) => console.error("Error fetching member:", error));
   }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Updating member:", memberData);
-    axios
-      .post(`http://localhost:8000/api/members/edit/${id}`, memberData)
+    updateMember(id, memberData)
       .then(() => navigate("/"))
       .catch((error) => console.error("Error updating member:", error));
   };
@@ -28,8 +29,7 @@ const EditPage = () => {
   };
 
   const handleDelete = () => {
-    axios
-      .delete(`http://localhost:8000/api/members/delete/${id}`)
+    deleteMember(id)
       .then(() => navigate("/"))
       .catch((error) => console.error("Error deleting member:", error));
   };
