@@ -10,6 +10,14 @@ module.exports = class Member {
   }
 
   async save() {
+    const existsQuery =
+      "SELECT * FROM members WHERE email = $1 OR phone_num = $2";
+    const exists = await db.query(existsQuery, [this.email, this.phone_num]);
+
+    if (exists.rowCount > 0) {
+      throw new Error("Member with this email or phone number already exists");
+    }
+
     const query = {
       name: "insert-member",
       text: "INSERT INTO members (first_name, last_name, email, phone_num, role) VALUES ($1, $2, $3, $4, $5)",
