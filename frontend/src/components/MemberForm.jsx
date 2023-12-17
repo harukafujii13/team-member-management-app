@@ -1,13 +1,32 @@
-// src/components/MemberForm.js
-import React from "react";
+import React, { useState } from "react";
+import ValidateMemberData from "./ValidateMemberData";
 
 const MemberForm = ({
   memberData,
-  handleChange,
-  handleSubmit,
+  handleChange: originalHandleChange,
+  handleSubmit: originalHandleSubmit,
   handleDelete,
   isNewMember,
 }) => {
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    originalHandleChange(event);
+    const newErrors = ValidateMemberData({ ...memberData, [name]: value });
+    setErrors(newErrors);
+  };
+
+  const handleSubmit = (event) => {
+    const newErrors = ValidateMemberData(memberData);
+    if (Object.keys(newErrors).length > 0) {
+      event.preventDefault();
+      setErrors(newErrors);
+      return;
+    }
+    originalHandleSubmit(event);
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -20,29 +39,52 @@ const MemberForm = ({
             value={memberData.first_name || ""}
             onChange={handleChange}
             placeholder="First Name"
-            className="mt-1 px-4 py-2 border rounded-lg w-full"
+            className={`mt-1 px-4 py-2 border rounded-lg w-full ${
+              errors.first_name ? "border-red-500" : ""
+            }`}
           />
+          {errors.first_name && (
+            <p className="text-red-500 text-xs">{errors.first_name}</p>
+          )}
+
           <input
             name="last_name"
             value={memberData.last_name || ""}
             onChange={handleChange}
             placeholder="Last Name"
-            className="mt-1 px-4 py-2 border rounded-lg w-full"
+            className={`mt-1 px-4 py-2 border rounded-lg w-full ${
+              errors.last_name ? "border-red-500" : ""
+            }`}
           />
+          {errors.last_name && (
+            <p className="text-red-500 text-xs">{errors.last_name}</p>
+          )}
+
           <input
             name="email"
             value={memberData.email || ""}
             onChange={handleChange}
             placeholder="Email"
-            className="mt-1 px-4 py-2 border rounded-lg w-full"
+            className={`mt-1 px-4 py-2 border rounded-lg w-full ${
+              errors.email ? "border-red-500" : ""
+            }`}
           />
+          {errors.email && (
+            <p className="text-red-500 text-xs">{errors.email}</p>
+          )}
+
           <input
             name="phone_num"
             value={memberData.phone_num || ""}
             onChange={handleChange}
             placeholder="Phone Number"
-            className="mt-1 px-4 py-2 border rounded-lg w-full"
+            className={`mt-1 px-4 py-2 border rounded-lg w-full ${
+              errors.phone_num ? "border-red-500" : ""
+            }`}
           />
+          {errors.phone_num && (
+            <p className="text-red-500 text-xs">{errors.phone_num}</p>
+          )}
         </div>
       </div>
       <div>
