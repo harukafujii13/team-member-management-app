@@ -1,4 +1,3 @@
-// src/routes/EditPage.js
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -36,7 +35,6 @@ const EditPage = () => {
       .catch((error) => console.error("Error deleting member:", error));
   };
 
-  // Since we are editing an existing member, isNewMember is set to false.
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">

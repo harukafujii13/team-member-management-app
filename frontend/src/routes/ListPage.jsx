@@ -1,4 +1,3 @@
-// src/routes/ListPage.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchAllMembers } from "../api/service/memberService";

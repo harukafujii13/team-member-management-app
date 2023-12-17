@@ -1,4 +1,3 @@
-// src/routes/AddPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMember } from "../api/service/memberService";
@@ -25,7 +24,6 @@ const AddPage = () => {
       .catch((error) => console.error("Error adding member:", error));
   };
 
-  // No delete functionality needed on the AddPage, so we don't pass a handleDelete or isNewMember prop.
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
