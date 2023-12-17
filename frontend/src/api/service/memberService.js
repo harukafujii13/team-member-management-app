@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const API_BASE_URL = "http://localhost:8000/api/members";
 
@@ -10,8 +11,19 @@ export const fetchMemberById = (id) => {
   return axios.get(`${API_BASE_URL}/edit/${id}`);
 };
 
-export const createMember = (memberData) => {
-  return axios.post(`${API_BASE_URL}/create`, memberData);
+export const createMember = async (memberData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/create`, memberData);
+    toast.success("Member created successfully!");
+    return response;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      toast.error("This email or phone number already exists!");
+    } else {
+      toast.error("Network error!");
+    }
+    throw error;
+  }
 };
 
 export const updateMember = (id, memberData) => {
