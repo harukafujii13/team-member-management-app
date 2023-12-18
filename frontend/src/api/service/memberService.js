@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_BASE_URL = "http://localhost:8000/api/members";
+const API_BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api/v1/`;
 
 export const fetchAllMembers = () => {
   return axios.get(`${API_BASE_URL}/all`);
