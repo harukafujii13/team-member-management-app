@@ -2,17 +2,19 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const fetchAllMembers = () => {
-  return axios.get(`${process.env.API_BASE_URL}/all`);
+  return axios.get(`${import.meta.env.VITE_API_BASE_URL}/all`);
 };
 
+console.log("hihihi", import.meta.env.VITE_API_BASE_URL);
+
 export const fetchMemberById = (id) => {
-  return axios.get(`${process.env.API_BASE_URL}/edit/${id}`);
+  return axios.get(`${import.meta.env.VITE_API_BASE_URL}/edit/${id}`);
 };
 
 export const createMember = async (memberData) => {
   try {
     const response = await axios.post(
-      `${process.env.API_BASE_URL}/create`,
+      `${import.meta.env.VITE_API_BASE_URL}/create`,
       memberData
     );
     toast.success("Member created successfully!");
@@ -28,9 +30,12 @@ export const createMember = async (memberData) => {
 };
 
 export const updateMember = (id, memberData) => {
-  return axios.post(`${process.env.API_BASE_URL}/edit/${id}`, memberData);
+  return axios.post(
+    `${import.meta.env.VITE_API_BASE_URL}/edit/${id}`,
+    memberData
+  );
 };
 
 export const deleteMember = (id) => {
-  return axios.delete(`${process.env.API_BASE_URL}/delete/${id}`);
+  return axios.delete(`${import.meta.env.VITE_API_BASE_URL}/delete/${id}`);
 };
