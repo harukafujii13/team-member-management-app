@@ -4,7 +4,9 @@ This documentation provides a guide for building a simple team management system
 
 ## Deploy URL
 
-- team-member-management-app-harukafujii13.vercel.app/
+Experience the live version of the Team Member Management App:
+
+[Team Member Management App](https://team-member-management-app-harukafujii13.vercel.app/)
 
 ## Introduction
 
