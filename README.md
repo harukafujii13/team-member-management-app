@@ -2,6 +2,10 @@
 
 This documentation provides a guide for building a simple team management system in an organization. It includes features for listing, adding, editing and deleting team member details.
 
+## Deploy URL
+
+- team-member-management-app-harukafujii13.vercel.app/
+
 ## Introduction
 
 The Team Member Management App is a web-based application designed to manage details of team members, including their first and last names, phone numbers, emails, and roles. Utilizing SQL for its backend operations, the app ensures efficient data processing and storage. Complementing this is a user-friendly frontend web interface, designed to facilitate easy addition, editing, deleting and listing of team member details.
