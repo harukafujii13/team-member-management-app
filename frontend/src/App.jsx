@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  console.log("hi", import.meta.env.VITE_API_BASE_URL);
   return (
     <BrowserRouter>
       <ToastContainer
