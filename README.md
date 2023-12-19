@@ -51,7 +51,7 @@ npm run dev
 
 4. Access the frontend web application at http://localhost:5173.
 
-#### Server Environment Variables
+#### Backend Environment Variables
 
 Before running the backend, make sure to set the following environment variables in a `.env` file for the server (located in the `backend/` directory):
 
@@ -62,7 +62,7 @@ cp backend/.env-sample backend/.env
 - `PORT`: The port on which the server should listen. (8000)
 - `FRONTEND_URL`: The URL of the frontend application. (http://localhost:5173)
 
-Add your connection string in postgresql
+Add your connection string from postgresql.
 
 - `DB_HOST`
 - `DB_USER`
@@ -70,7 +70,7 @@ Add your connection string in postgresql
 - `DB_NAME`
 - `DB_PORT`
 
-#### Client Environment Variables
+#### Frontend Environment Variables
 
 For the frontend web application, set the following environment variable in a `.env` file for the client (located in the `frontend/` directory):
 
@@ -78,9 +78,7 @@ For the frontend web application, set the following environment variable in a `.
 cp frontend/.env-sample frontend/.env
 ```
 
-- `VITE_API_BASE_URL`: The backend API endpoint URL for making requests from the frontend. (api/members)
-
-5. Access the frontend web application at http://localhost:5173
+- `VITE_API_BASE_URL`: The backend API endpoint URL for making requests from the frontend. (http://localhost:8000/api/members)
 
 ## Backend
 
@@ -118,8 +116,6 @@ The application addresses the following user stories:
 <img width="1437" alt="ListPage" src="https://github.com/harukafujii13/team-member-management-app/assets/111606615/89c603d6-d06a-4e8e-952a-3079d66dc0ca">
 <img width="1445" alt="AddPage" src="https://github.com/harukafujii13/team-member-management-app/assets/111606615/5cc5e709-3520-49b1-8637-49810f183489">
 <img width="1454" alt="EditPage" src="https://github.com/harukafujii13/team-member-management-app/assets/111606615/f95245cd-5831-4ff3-b3b4-865eb1149f55">
-
-
 
 ## Conclusion
 
